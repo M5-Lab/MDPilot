@@ -12,11 +12,14 @@ def block_ave(array,threshold=0.025, time_step=1, visualize=False):
 
     inputs: 
         array: numpy array of equally space time-series data
+        threshold: float, threshold for the first derivative of the normalized variance
+        time_step: float, time step between data points
         visualize: boolean, whether or not to plot the variance as a function of block size
     
     returns: 
-        tau: estimated correlation time (in number of steps)
-        var: (best) variance estimate
+        best_transform: number of block transformations that gave the best estimate of the variance
+        t_decorrelation: estimated correlation time
+        estimate_var: estimated variance of the data given len(array) // 2 ** (best_transform + 1) decorrelated samples
     """
     # Number of block transformations we apply corresponds to the number of times we divide by 2 and still have (at least) 10 blocks 
     upper_limit = len(array) // 10
