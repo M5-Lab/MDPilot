@@ -1,7 +1,6 @@
 #! /usr/bin/env python3
 
-import numpy as np
-import os
+import pandas as pd
 from joblib import Parallel, delayed
 import time
 from pathlib import Path
@@ -10,7 +9,6 @@ from rich import print as echo
 from mdpilot.src import LAMMPS_Project
 
 import typer
-app = typer.Typer()
 
 
 def run(project, job_names, np, ncores, lmp_command): #Run all active jobs
@@ -27,27 +25,30 @@ def run(project, job_names, np, ncores, lmp_command): #Run all active jobs
             Parallel(n_jobs = len(chunk))(delayed(project.run_job)(job, cmd) for job in chunk)
     echo("---All jobs took %s seconds ---" % (time.time() - start_time))
 
-def setup(infile_path : Path, base_path : Path,  project_name : str, param_combos_path : Path, vel_seed_name : str):
+def setup(
+        infile_path : Path,
+        base_path : Path,
+        project_name : str,
+        param_combos_path : Path,
+        n_runs : int, 
+        vel_seed_name : str
+    ):
 
     project = LAMMPS_Project(project_name, infile_path, base_path)
 
-    temps = [100,300,500,700,900,1100,1300]
-
-    lattice_const_mapping = {100: 5.4333, 200: 5.4353, 300 : 5.4373, 400 : 5.4393, 500: 5.4411, 600 : 5.4428, 700 : 5.4446, 800: 5.4464, 900: 5.448, 1000: 5.4496}
-    dt = 1e-3
-    n_runs = 40
+    combos = pd.read_csv(param_combos_path)
     job_names = []
 
-    for i in range(len(temps)):
-         T = temps[i]
-         job_name = f"T{T}"
-         job_names.append(job_name)
-         #project.new_job(job_name, n_runs, ["velocity_seed"], {"T": T , "lattice_const" : lattice_const_mapping[T]})
-         project.new_job(job_name, n_runs, [vel_seed_name], {"T": T})
-    
+    for idx, combo in combos:
+        job_name = f"T{T}"
+        job_names.append(job_name)
+
+        data = {col : combo[col] for col in combos.columns}
+        project.new_job(job_name, n_runs, [vel_seed_name], data)
+
+
     return project, job_names
 
-@app.command()
 def main(
     infile_path: Path,
     base_path: Path,
@@ -61,4 +62,4 @@ def main(
     run(proj, job_names, np, ncores, lmp_command)
 
 if __name__ == "__main__":
-    app()
+    typer.run(main)
