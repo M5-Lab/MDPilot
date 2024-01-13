@@ -9,6 +9,7 @@ from rich import print as echo
 from mdpilot.src import LAMMPS_Project
 
 import typer
+app = typer.Typer()
 
 
 def run(project, job_names, np, ncores, lmp_command): #Run all active jobs
@@ -50,6 +51,7 @@ def setup(
 
     return project, job_names
 
+@app.command()
 def main(
     infile_path: Path,
     base_path: Path,
@@ -63,4 +65,4 @@ def main(
     run(proj, job_names, np, ncores, lmp_command)
 
 if __name__ == "__main__":
-    typer.run(main)
+    app()

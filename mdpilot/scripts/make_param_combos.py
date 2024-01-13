@@ -9,8 +9,9 @@ from itertools import product
 import os
 
 import typer
+app = typer.Typer()
 
-
+@app.command()
 def main(
     param_names: List[str],
     param_values: List[Union[List[Number], List[str]]],
@@ -78,4 +79,4 @@ def main(
 
 
 if __name__ == "__main__":
-    typer.run(main)
+    app()
