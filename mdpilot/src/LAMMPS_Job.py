@@ -2,13 +2,13 @@ import os
 import numpy as np
 import shutil
 import time
+from typing import Type
 
-from .FileIO.InFile import InFile
-from .LAMMPS_Project import LAMMPS_Project
+from FileIO import InFile
 
 class LAMMPS_Job:
 
-    def __init__(self, parent_project : 'LAMMPS_Project', name: str, n_seeds: int, seed_variables :list, variables : dict = None):
+    def __init__(self, parent_project : Type[LAMMPS_Project], name: str, n_seeds: int, seed_variables :list, variables : dict = None):
         '''
         Parent Project:
         Name:
