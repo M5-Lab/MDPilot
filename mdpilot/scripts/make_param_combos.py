@@ -20,10 +20,10 @@ def process(data: str):
 
 @app.command()
 def main(
-    param_names: List[str],
+    param_names: str,
     param_values: str,
-    outfile_path: Path = Path(os.getcwd()),
     index_by: List[int] = None,
+    outfile_path: Path = Path(os.getcwd())
 ):
     """
     Create a csv file with all combinations of parameters.
@@ -42,7 +42,7 @@ def main(
         to the value in that list.
 
     Example:
-    param_names = ["Temp", "Interval" "Lattice_const"]
+    param_names = "['Temp', 'Interval', 'Lattice_const']"
     param_values = "[[10, 20, 30], [1, 2], [5.5, 5.4, 5.3]]"
     outfile_path = "C:/Users/<username>/Desktop"
     index_by = [-1, -1, 0]
@@ -55,7 +55,8 @@ def main(
     30 1 5.3
     30 2 5.3
     """
-
+    
+    param_names = process(param_names)
     param_values = process(param_values)
 
     assert len(param_names) == len(param_values), f"Number of parameter names ({len(param_names)}) does not match number of parameter values ({len(param_values)})"
