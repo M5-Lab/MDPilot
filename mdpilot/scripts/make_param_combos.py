@@ -3,7 +3,7 @@
 import numpy as np
 import pandas as pd
 from pathlib import Path
-from typing import List, Union
+from typing import List, Union, Any
 from numbers import Number
 from itertools import product
 import os
@@ -14,7 +14,7 @@ app = typer.Typer()
 @app.command()
 def main(
     param_names: List[str],
-    param_values: List[Union[List[Number], List[str]]],
+    param_values: List[List[Any]],
     outfile_path: Path = Path(os.getcwd()),
     index_by: List[int] = None,
 ):
