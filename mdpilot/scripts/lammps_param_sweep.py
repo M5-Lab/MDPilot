@@ -39,13 +39,14 @@ def setup(
     combos = pd.read_csv(param_combos_path)
     job_names = []
 
-    for idx, combo in combos:
-        job_name = f"T{T}"
+    for _, combo in combos:
+        job_name = ""
+        for i, col in enumerate(combos.columns):
+            job_name += f"{col}{i}"
         job_names.append(job_name)
 
         data = {col : combo[col] for col in combos.columns}
         project.new_job(job_name, n_runs, [vel_seed_name], data)
-
 
     return project, job_names
 
