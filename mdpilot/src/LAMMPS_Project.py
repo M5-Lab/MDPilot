@@ -3,7 +3,7 @@ import copy
 import shutil
 
 from .LAMMPS_Job import LAMMPS_Job
-from .FileIO.InFile import InFile
+from FileIO import InFile
 
 class LAMMPS_Project:
     '''
