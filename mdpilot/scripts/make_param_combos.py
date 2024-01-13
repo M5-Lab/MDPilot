@@ -3,7 +3,7 @@
 import numpy as np
 import pandas as pd
 from pathlib import Path
-from typing import List
+from typing import List, Union
 from numbers import Number
 from itertools import product
 import os
@@ -13,7 +13,7 @@ import typer
 
 def main(
     param_names: List[str],
-    param_values: List[List[Number] | List[str]],
+    param_values: List[Union[List[Number], List[str]]],
     outfile_path: Path = Path(os.getcwd()),
     index_by: List[int] = None,
 ):
@@ -50,6 +50,7 @@ def main(
 
     assert len(param_names) == len(param_values), f"Number of parameter names ({len(param_names)}) does not match number of parameter values ({len(param_values)})"
     assert len(index_by) == len(param_names), f"Length of index_by ({len(index_by)}) does not match number of parameters ({len(param_names)})"
+    assert np.all(index_by != np.arange(0,len(index_by))), f"Cannot index param with itself"
 
     if index_by == None:
         index_by = -1*np.ones(len(param_names))
