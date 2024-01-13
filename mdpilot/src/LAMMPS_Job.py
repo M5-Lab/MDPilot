@@ -8,11 +8,16 @@ from .FileIO.InFile import InFile
 
 class LAMMPS_Job:
 
-    def __init__(self, parent_project : Type[LAMMPS_Project], name: str, n_seeds: int, seed_variables :list, variables : dict = None):
+    def __init__(self, parent_project, name: str, n_seeds: int, seed_variables :list, variables : dict = None):
         '''
-        Parent Project:
-        Name:
-        Variables:
+        Parent Project: Type of LAMMPS_Project, contains the information about where files will be saved etc.
+        Name: Name to be used when file to store job is created
+        n_seeds: Number of seeds to run.
+        seed_variables: Name of variables in the in-file to change with each seed (e.g. velocity_seed). If more than
+            one variable is passed they will be changed at the same time and not generate all combinations. The seed
+            is generated randomly from 1000-1000000
+        variables: Dictionary of variable name & value pairs. For example {"Temps": [10, 20, 30]}. The name in the
+            keys should match a variable in the LAMMPS input file.
         '''
         self.parent_project = parent_project
         self.name = name
