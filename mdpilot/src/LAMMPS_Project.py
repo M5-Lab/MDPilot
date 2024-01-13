@@ -2,8 +2,8 @@ import os
 import copy
 import shutil
 
-from .LAMMPS_Job import LAMMPS_Job
-from .FileIO.InFile import InFile
+from mdpilot.LAMMPS_Job import LAMMPS_Job
+from mdpilot.FileIO.InFile import InFile
 
 class LAMMPS_Project:
     '''
