@@ -47,6 +47,9 @@ def main(
     outfile_path = "C:/Users/<username>/Desktop"
     index_by = [-1, -1, 0]
 
+    Example Usage:
+    make_param_combos "['Temp', 'Interval', 'Lattice_const']" "[[10, 20, 30], [1, 2], [5.5, 5.4, 5.3]]" --index-by -1 --index-by -1 --index-by 0
+
     This will generate the following combinations. Note how the lattice constant is always pegged to the temperature.
     10 1 5.5
     10 2 5.5
@@ -55,7 +58,7 @@ def main(
     30 1 5.3
     30 2 5.3
     """
-    
+
     param_names = process(param_names)
     param_values = process(param_values)
 
