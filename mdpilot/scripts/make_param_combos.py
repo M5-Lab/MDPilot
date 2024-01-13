@@ -3,18 +3,26 @@
 import numpy as np
 import pandas as pd
 from pathlib import Path
-from typing import List, Union, Any
-from numbers import Number
+from typing import List
+
 from itertools import product
 import os
+import ast
 
 import typer
 app = typer.Typer()
 
+def process(data: str):
+    try:
+        list_of_lists = ast.literal_eval(data)
+        return list_of_lists
+    except (ValueError, SyntaxError) as e:
+        typer.echo(f"Error parsing param_values as list of lists from string: {e}")
+
 @app.command()
 def main(
     param_names: List[str],
-    param_values: List[List[Any]],
+    param_values: str,
     outfile_path: Path = Path(os.getcwd()),
     index_by: List[int] = None,
 ):
@@ -25,8 +33,8 @@ def main(
     ----------
     param_names : List[str]
         Names of parameters , these should match the names of the variables in the LAMMPS script (in-file)
-    param_values : List[List[Number] | List[str]]
-        List of lists of parameter values
+    param_values : str
+        List of lists of parameter values formated as a string. For example, "[[1,2], [3,4]]"
     outfile_path : Path
         Path to output file where the combinations will be saved. Default is current working directory.
     index_by : List[int], optional
@@ -36,7 +44,7 @@ def main(
 
     Example:
     param_names = ["Temp", "Interval" "Lattice_const"]
-    param_values = [[10, 20, 30], [1, 2], [5.5, 5.4, 5.3]]
+    param_values = "[[10, 20, 30], [1, 2], [5.5, 5.4, 5.3]]"
     outfile_path = "C:/Users/<username>/Desktop"
     index_by = [-1, -1, 0]
 
