@@ -3,7 +3,7 @@ import copy
 import shutil
 
 from .LAMMPS_Job import LAMMPS_Job
-from FileIO import InFile
+from .FileIO.InFile import InFile
 
 class LAMMPS_Project:
     '''
@@ -133,3 +133,4 @@ class LAMMPS_Project:
             print(f"{job_name} completed successfully."); print()
         except KeyError:
             raise KeyError(f"No job with name {job_name}")
+
