@@ -14,8 +14,7 @@ app = typer.Typer()
 
 def process(data: str):
     try:
-        list_of_lists = ast.literal_eval(data)
-        return list_of_lists
+        return ast.literal_eval(data)
     except (ValueError, SyntaxError) as e:
         typer.echo(f"Error parsing param_values as list of lists from string: {e}")
 
@@ -28,7 +27,7 @@ def main(
 ):
     """
     Create a csv file with all combinations of parameters.
-
+    
     Parameters
     ----------
     param_names : List[str]
@@ -56,6 +55,8 @@ def main(
     30 1 5.3
     30 2 5.3
     """
+
+    param_values = process(param_values)
 
     assert len(param_names) == len(param_values), f"Number of parameter names ({len(param_names)}) does not match number of parameter values ({len(param_values)})"
     assert len(index_by) == len(param_names), f"Length of index_by ({len(index_by)}) does not match number of parameters ({len(param_names)})"
