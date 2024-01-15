@@ -3,7 +3,8 @@
 import numpy as np
 import pandas as pd
 from pathlib import Path
-from typing import List
+from typing import List, Optional
+from typing_extensions import Annotated
 
 from itertools import product
 import os
@@ -20,27 +21,24 @@ def process(data: str):
 
 @app.command()
 def main(
-    param_names: str,
-    param_values: str,
-    index_by: List[int] = None,
-    outfile_path: Path = Path(os.getcwd())
+    param_names: Annotated[
+        str, typer.Argument(help = "Names of parameters which match the names of the variables in the LAMMPS in file")
+    ],
+    param_values: Annotated[
+        str, typer.Argument(help = "List of lists of parameter values formated as a string. For example, '[[1,2], [3,4]]'")
+    ],
+    index_by: Annotated[
+        Optional[List[int]], typer.Argument(help = "List of integers that tell the function how to generate the combinations. If the entry is -1, then \
+        the parameter is included when calculating all combinations. If an integer is given, then that parameter is always matched \
+        to the value in that list.")
+    ] = None,
+    outfile_path: Annotated[
+        Optional[Path], typer.Argument(help = "Dir where the combinations will be saved", show_default="current directory")
+    ] = Path(os.getcwd())
 ):
     """
     Create a csv file with all combinations of parameters.
     
-    Parameters
-    ----------
-    param_names : List[str]
-        Names of parameters , these should match the names of the variables in the LAMMPS script (in-file)
-    param_values : str
-        List of lists of parameter values formated as a string. For example, "[[1,2], [3,4]]"
-    outfile_path : Path
-        Path to output file where the combinations will be saved. Default is current working directory.
-    index_by : List[int], optional
-        List of integers that tell the function how to generate the combinations. If the entry is -1, then
-        the parameter is included when calculating all combinations. If an integer is given, then that parameter is always matched
-        to the value in that list.
-
     Example:
     param_names = "['Temp', 'Interval', 'Lattice_const']"
     param_values = "[[10, 20, 30], [1, 2], [5.5, 5.4, 5.3]]"
