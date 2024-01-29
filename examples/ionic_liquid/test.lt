@@ -1,0 +1,44 @@
+ethylNH4 inherits OPLSAA {
+
+  ### LAMMPS commands for initialization
+  ### (These can be overridden later.)
+
+
+  write_once("In Init") {
+    atom_style full
+  }
+
+  write_once("Data Masses") {
+    @atom:C 12.0107
+    @atom:H 1.00794
+    @atom:N 14.0067
+  }
+
+  write("Data Atoms") {
+    $atom:C_1 $mol:m1 @atom:C 0.00000 -4.65000 2.59170 0.00000
+    $atom:C_2 $mol:m1 @atom:C 0.00000 -3.93550 3.00420 0.00000
+    $atom:N $mol:m1 @atom:N 0.00000 -3.22110 2.59170 0.00000
+    $atom:H_1 $mol:m1 @atom:H 0.41000 -5.57660 3.12670 0.00000
+    $atom:H_2 $mol:m1 @atom:H 0.41000 -4.65000 1.52170 0.00000
+    $atom:H_3 $mol:m1 @atom:H 0.41000 -5.57670 2.05670 0.00000
+    $atom:H_4 $mol:m1 @atom:H 0.41000 -3.93550 4.07420 0.00000
+    $atom:H_5 $mol:m1 @atom:H 0.41000 -3.00880 3.53920 0.00000
+    $atom:H_6 $mol:m1 @atom:H 0.41000 -3.22110 1.57170 0.00000
+    $atom:H_7 $mol:m1 @atom:H 0.41000 -2.33770 3.10170 0.00000
+    $atom:H_8 $mol:m1 @atom:H 0.41000 -2.33780 2.08170 0.00000
+  }
+
+  write("Data Bond List") {
+    $bond:id1 $atom:C_1 $atom:C_2
+    $bond:id2 $atom:C_1 $atom:H_1
+    $bond:id3 $atom:C_1 $atom:H_2
+    $bond:id4 $atom:C_1 $atom:H_3
+    $bond:id5 $atom:N $atom:C_2
+    $bond:id6 $atom:C_2 $atom:H_4
+    $bond:id7 $atom:C_2 $atom:H_5
+    $bond:id8 $atom:N $atom:H_6
+    $bond:id9 $atom:N $atom:H_7
+    $bond:id10 $atom:N $atom:H_8
+  }
+
+} # end of "ethylNH4 inherits OPLSAA" type definition

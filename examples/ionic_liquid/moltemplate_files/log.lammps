@@ -1,0 +1,26 @@
+LAMMPS (2 Aug 2023)
+
+
+# ----------------- Init Section -----------------
+
+include "system.in.init"
+units real
+atom_style      full
+bond_style      harmonic
+angle_style     harmonic
+dihedral_style  harmonic
+improper_style  harmonic
+#pair_style      lj/cut/coul/cut 12  # for non-period sims
+pair_style      lj/cut/coul/long 12
+kspace_style    pppm 0.0001
+special_bonds lj 0.0 0.0 0.5 coul 0.0 0.0 1.0 angle yes dihedral yes
+
+
+# ----------------- Atom Definition Section -----------------
+
+read_data "system.data"
+Reading data file ...
+  orthogonal box = (0 0 0) to (41.43 41.43 41.43)
+  1 by 1 by 1 MPI processor grid
+ERROR: Invalid format in Masses section of data file:  (src/read_data.cpp:1978)
+Last command: read_data "system.data"

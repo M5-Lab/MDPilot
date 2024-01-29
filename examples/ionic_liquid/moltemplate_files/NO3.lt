@@ -1,0 +1,41 @@
+import "GROMOS_5447.lt" 
+
+NO3 inherits GROMOS_54A7_ATB {
+    write("Data Atoms"){
+        $atom:O3     $mol:... @atom:OEOpt  -0.629000  5.6755692000E-03 -1.2610648918E+00 -1.0556310000E-04
+        $atom:N      $mol:... @atom:NOpt    0.887000  1.0500400000E-05  2.7881650000E-04  6.6638500000E-05
+        $atom:O1     $mol:... @atom:OEOpt  -0.629000  1.0913813324E+00  6.3541721760E-01 -6.1940000000E-07
+        $atom:O2     $mol:... @atom:OEOpt  -0.629000 -1.0970499861E+00  6.2538072590E-01  8.4105000000E-05
+    }
+
+    write_once("Data Masses") {
+        @atom:N 14.0067
+        @atom:O 15.9994 
+        @atom:OM 15.9994
+        @atom:OA 15.9994
+        @atom:OEOpt 15.9994
+        @atom:OE 14.0067
+        @atom:OW 14.0067
+        @atom:NT 14.0067
+        @atom:NL 14.0067
+        @atom:NR 14.0067
+        @atom:NZ 14.0067
+        @atom:NE 14.0067
+    }
+
+    write("Data Bonds"){
+        $bond:b1      @bond:g44    $atom:O3     $atom:N      
+        $bond:b2      @bond:g44    $atom:N      $atom:O1     
+        $bond:b3      @bond:g44    $atom:N      $atom:O2     
+    }
+    write("Data Angles"){
+        $angle:a1      @angle:g29    $atom:O3     $atom:N      $atom:O1     
+        $angle:a2      @angle:g29    $atom:O3     $atom:N      $atom:O2     
+        $angle:a3      @angle:g29    $atom:O1     $atom:N      $atom:O2     
+    }
+    write("Data Dihedrals"){
+    }
+    write("Data Impropers"){
+        $improper:i1      @improper:g1     $atom:N      $atom:O3     $atom:O1     $atom:O2     
+    }
+}
