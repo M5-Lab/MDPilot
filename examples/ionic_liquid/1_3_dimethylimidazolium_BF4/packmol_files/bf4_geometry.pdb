@@ -1,0 +1,15 @@
+HEADER    UNCLASSIFIED                            19-Jun-23
+TITLE     ALL ATOM STRUCTURE FOR MOLECULE M                                     
+AUTHOR    AUTOMATED TOPOLOGY BUILDER (ATB) REVISION 2023-06-14 20:38:16
+AUTHOR   2  https://atb.uq.edu.au
+HETATM    1  F35 98RO    0       0.349  -0.117  -1.358  1.00  0.00           F
+HETATM    2  B31 98RO    0      -0.001  -0.002  -0.000  1.00  0.00           B
+HETATM    3  F32 98RO    0       1.143  -0.186   0.798  1.00  0.00           F
+HETATM    4  F33 98RO    0      -0.963  -0.979   0.317  1.00  0.00           F
+HETATM    5  F34 98RO    0      -0.528   1.283   0.243  1.00  0.00           F
+CONECT    1    2
+CONECT    2    1    3    4    5
+CONECT    3    2
+CONECT    4    2
+CONECT    5    2
+END

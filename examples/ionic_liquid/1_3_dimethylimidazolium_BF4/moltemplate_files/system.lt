@@ -1,0 +1,24 @@
+import "emim_geometry.lt"  # Defines MIM ion 
+import "bf4_geometry.lt"  # Defines BF4 ion 
+
+# Periodic boundary conditions:
+write_once("Data Boundary") {
+   0.0  50  xlo xhi
+   0.0  50  ylo yhi
+   0.0  50  zlo zhi
+}
+
+
+# We used PackMOl to generate the mixture of ethylNH4 and NO3 
+# Here only need to initialize number of each in order created in .inp file 
+
+EMIM_mols = new emim [500]
+
+BF4_mols = new bf4 [500]
+
+
+
+
+
+
+

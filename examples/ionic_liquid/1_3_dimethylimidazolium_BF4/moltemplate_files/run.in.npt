@@ -1,0 +1,32 @@
+# ------------------------------- Initialization Section --------------------
+
+include         system.in.init
+
+# ------------------------------- Atom Definition Section -------------------
+
+read_data       system.data
+
+# ------------------------------- Settings Section --------------------------
+
+include         system.in.settings
+
+# ------------------------------- Run Section -------------------------------
+
+
+variable mytemp equal temp
+variable myvol equal vol
+variable mypress equal press
+
+fix myat1 all ave/time 20 20 1000 v_mytemp file temperature.dat
+fix myat2 all ave/time 20 20 1000 v_myvol file volume.dat
+fix myat3 all ave/time 20 20 1000 v_mypress file pressure.dat
+
+fix fxnpt all npt temp 500.0 500.0 50.0 iso 1 1 500.0 
+
+timestep        0.5 # 0.5 fs
+run             2000000 # 2 ns = 
+
+
+write_data   system_equilibrated.data
+
+
