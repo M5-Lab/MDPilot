@@ -9,3 +9,6 @@ class EnergyEquilibrationComponent(EquilibrationComponent):
 
     def get_equilibration_property(self):
         pass
+
+    def generate_script_text(self):
+        pass
