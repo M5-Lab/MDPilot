@@ -1,11 +1,9 @@
-from TempeartureEquilibrationComponent import TempeartureEquilibrationComponent
-from PressureEquilibrationComponent import PressureEquilibrationComponent
-from DensityEquilibrationComponent import DensityEquilibrationComponent
-from EnergyEquilibrationComponent import EnergyEquilibrationComponent
+from NVT_Equilibration import NVT_Equilibration
+from NPT_Equilibration import NPT_Equilibration
+from NVE_Equilibration import NVE_Equilibration
 
 __all__ = [
-    "TempeartureEquilibrationComponent",
-    "PressureEquilibrationComponent",
-    "DensityEquilibrationComponent",
-    "EnergyEquilibrationComponent"
+    "NVT_Equilibration",
+    "NPT_Equilibration",
+    "NVE_Equilibration"
 ]

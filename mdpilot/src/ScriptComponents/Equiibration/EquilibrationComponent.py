@@ -1,21 +1,16 @@
-from abc import ABC, abstractmethod
+import AbstractScriptComponent as AbstractScriptComponent
+import NVE_Equilibration, NPT_Equilibration, NVT_Equilibration
 
-import ScriptComponent
-import EnergyEquilibrationComponent, DensityEquilibrationComponent, \
-         PressureEquilibrationComponent, TempeartureEquilibrationComponent
-
-class EquilibrationComponent(ABC, ScriptComponent):
-
+class EquilibrationComponent(AbstractScriptComponent):
+    # This class cannot be constructed because it does not implement 
+    # the abstract method generate_script_text. However, the child classes
+    # which inhert EquilibrationComponent will implement this method and can use
+    # the methods implemented in this class.
+    
     def __init__(self):
-        super().__init__(self)
-        #init other properties here
-
-    @abstractmethod
-    def get_equilibration_property(self):
         pass
 
-    def is_equilibrated(self):
-        #use self.get_equilibration_property() to implment generic version
+    def is_equilibrated(self, property : list):
         pass
 
 
@@ -30,13 +25,12 @@ def construct_equilibration_component(property : str):
         EquilibrationComponent: An instance of the EquilibrationComponent for the specified property.
     """
     equilibration_components = {
-        "Pressure": PressureEquilibrationComponent,
-        "Temperature": TempeartureEquilibrationComponent,
-        "Density": DensityEquilibrationComponent,
-        "Energy" : EnergyEquilibrationComponent
+        "NPT": NPT_Equilibration,
+        "NVT": NVT_Equilibration,
+        "NVE": NVE_Equilibration,
     }
 
     if property not in equilibration_components.keys():
-        raise KeyError(f"Invalid equilibration property: {property}. Must be 'Pressure', 'Temperature', 'Density', or 'Energy'")
+        raise KeyError(f"Invalid equilibration property: {property}. Must be NPT, NVE or NVT")
 
     return equilibration_components[property]()

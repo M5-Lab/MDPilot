@@ -1,6 +1,6 @@
 import EquilibrationComponent
 
-class PressureEquilibrationComponent(EquilibrationComponent):
+class NPT_Equilibration(EquilibrationComponent):
 
     def __init__(self):
         super().__init__()
@@ -9,3 +9,5 @@ class PressureEquilibrationComponent(EquilibrationComponent):
     def get_equilibration_property(self):
         pass
 
+    def generate_script_text(self):
+        pass
