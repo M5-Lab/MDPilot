@@ -4,7 +4,7 @@ import shutil
 import time
 from typing import Type
 
-from .FileIO.InFile import InFile
+from ..FileIO.InFile import InFile
 
 class LAMMPS_Job:
 
