@@ -8,23 +8,24 @@ class EquilibrationComponent(AbstractScriptComponent):
     # which inhert EquilibrationComponent will implement this method and can use
     # the methods implemented in this class.
     
-    def __init__(self):
+    def __init__(self, properties : list[list]):
+        # property: list of list of properties sampled over time 
         pass
 
-    def is_equilibrated(self, properties : list[list], tol : float):
+
+    def is_equilibrated(self, property_idx: int, target: float, tol : float):
         """
         Args:
-            property: list of properties to check equilibration
             tol: tolerance for equilibration
-
-        i.e. For the NVT ensemble, we check if temperature is equilibrated via the relation 
-            |var(T) - (kB*T_target^2)^2/var(E)| < tol 
-            var(T) is the variance of the temperature
-            var(E) is the variance of the total energy
-            kB is Boltzmann's constant
-            T_target is the target temperature
         """
-        pass
+        property = self.properties[property_idx]
+        samples = len(property)
+        prop_cum = np.abs(np.cumsum(property) / (np.arange(samples) + 1) - target)
+        return np.all(prop_cum[0.9*samples:] < tol) # at least last 10% of the time series are near target value within tolerance
+
+
+
+        
 
 
         
