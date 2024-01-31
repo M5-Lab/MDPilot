@@ -1,0 +1,31 @@
+# Initialization
+units lj
+dimension 3
+atom_style atomic
+pair_style lj/cut 2.5
+boundary p p p
+
+
+# System definition
+region simulation_box block -10 10 -10 10 -10 10
+create_box 1 simulation_box
+create_atoms 1 random 2500 341341 simulation_box
+
+# Simulation settings
+mass 1 1
+pair_coeff 1 1 1.0 1.0
+
+# Minimize
+minimize 1.0e-4 1.0e-6 1000 10000
+
+# Dynamics 
+timestep 0.005
+fix mynvt all nvt temp 1.0 1.0 $(100.0*dt)
+
+# For our purposes we need to output the temperature and energy of the system 
+variable T equal temp
+variable E equal etotal
+fix convergence_T all ave/time 1 1 1 v_T file convergence_T.txt
+fix convergence_E all ave/time 1 1 1 v_E file convergence_E.txt
+
+run 10000
