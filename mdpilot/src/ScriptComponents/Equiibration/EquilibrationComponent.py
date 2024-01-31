@@ -1,3 +1,4 @@
+import numpy as np
 import AbstractScriptComponent as AbstractScriptComponent
 import NVE_Equilibration, NPT_Equilibration, NVT_Equilibration
 
@@ -10,7 +11,26 @@ class EquilibrationComponent(AbstractScriptComponent):
     def __init__(self):
         pass
 
-    def is_equilibrated(self, property : list):
+    def is_equilibrated(self, properties : list[list], tol : float):
+        """
+        Args:
+            property: list of properties to check equilibration
+            tol: tolerance for equilibration
+
+        i.e. For the NVT ensemble, we check if temperature is equilibrated via the relation 
+            |var(T) - (kB*T_target^2)^2/var(E)| < tol 
+            var(T) is the variance of the temperature
+            var(E) is the variance of the total energy
+            kB is Boltzmann's constant
+            T_target is the target temperature
+        """
+        pass
+
+
+        
+        
+
+    def get_equilibration_property(self):
         pass
 
 
