@@ -24,6 +24,7 @@ fix myat3 all ave/time 10 10 1000 v_mypress file pressure_cooling.dat
 
 timestep        0.5 # 0.5 fs
 fix fxnpt all npt temp 500.0 300.0 50.0 iso 1 1 500.0 
+thermo 2500
 run             2000000 # 1 ns = 
 
 
