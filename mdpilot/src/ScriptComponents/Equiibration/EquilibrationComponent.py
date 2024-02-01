@@ -21,7 +21,7 @@ class EquilibrationComponent(AbstractScriptComponent):
         property = self.properties[property_idx]
         samples = len(property)
         prop_cum = np.abs(np.cumsum(property) / (np.arange(samples) + 1) - target)
-        return np.all(prop_cum[0.9*samples:] < tol) # at least last 10% of the time series are near target value within tolerance
+        return np.all(prop_cum[int(0.9*samples):] < tol) # at least last 10% of the time series are near target value within tolerance
 
 
 
