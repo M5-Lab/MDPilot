@@ -1,0 +1,33 @@
+# ------------------------------- Initialization Section --------------------
+
+include         system.in.init
+
+# ------------------------------- Atom Definition Section -------------------
+
+read_data       system_equilibrated_aftercooling_stable.data
+
+# ------------------------------- Settings Section --------------------------
+
+include         system.in.settings
+
+# ------------------------------- Run Section -------------------------------
+
+
+variable mytemp equal temp
+variable myvol equal vol
+variable mypress equal press
+
+fix myat1 all ave/time 100 10 10000 v_mytemp file temperature_aftercooling.dat
+fix myat2 all ave/time 100 10 10000 v_myvol file volume_aftercooling.dat
+fix myat3 all ave/time 100 10 10000 v_mypress file pressure_aftercooling.dat
+
+
+timestep        0.5 # 0.5 fs
+fix fxnpt all npt temp 300.0 300.0 50.0 iso 1 1 500.0 
+thermo 2500
+run             4000000 # 2 ns = 
+
+
+write_data   system_equilibrated_aftercooling_stable_2.data
+
+

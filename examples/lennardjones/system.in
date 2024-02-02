@@ -27,5 +27,8 @@ variable T equal temp
 variable E equal etotal
 #fix convergence_T all ave/time 1 1 1 v_T file convergence_T.txt
 #fix convergence_E all ave/time 1 1 1 v_E file convergence_E.txt
+run 5000
+
+dump mydmp all custom 200 dump.lammpstrj id vx vy vz
 thermo 10
-run 10000
+run 50000
