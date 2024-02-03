@@ -2,7 +2,7 @@ import numpy as np
 from .AbstractParsingStrategy import AbstractParsingStrategy
 
 
-class SimpleParsingStrategy(AbstractParsingStrategy):
+class FixPrintParser(AbstractParsingStrategy):
     '''
     Implementation of AbstractParsingStrategy designed for data output as columns.
         This object should work to parse the output of commands like:
