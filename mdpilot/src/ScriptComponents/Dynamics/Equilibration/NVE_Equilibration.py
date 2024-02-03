@@ -6,18 +6,21 @@ class NVE_Equilibration(EquilibrationScript):
     log_file_name = "nve_log.txt"
     log_header = '"PotEng"'
 
-    def NVE_Equilibration(self, n_steps : int, log_interval = 10000):
+    def NVE_Equilibration(self, pilot : "Pilot", n_steps : int, log_interval = 10000):
 
 
         self.n_steps = n_steps
         self.log_interval = log_interval
+
+        pilot.add_variables(self, ["n_steps"])
+
 
         #* would be nice to check that T_damp ~ 100*dt
 
 
     def generate_script_text(self):
         cmd = f"fix nvt_equil_fix all nvt temp {self.T_start} {self.T_end} {self.T_damp}\n"
-        run = f"run {self.n_steps}"
+        run = f"run {self.n_steps}\n"
         unfix = f"unfix nvt_equil_fix\n"
 
         log = ""

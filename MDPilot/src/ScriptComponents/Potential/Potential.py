@@ -1,7 +1,12 @@
 import AbstractScriptComponent
 
 
-class PotentialScript(AbstractScriptComponent):
+class Potential(AbstractScriptComponent):
 
-    def __init__(self):
-        pass
+    def __init__(self, pot_file_path : str = None):
+        self.pot_file_path = pot_file_path
+
+
+    def generate_script_text(self):
+        #& @NICK idk how you load a potential from a file but do that here
+
