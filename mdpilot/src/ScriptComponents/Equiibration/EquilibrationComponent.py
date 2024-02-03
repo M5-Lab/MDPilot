@@ -1,3 +1,4 @@
+import numpy as np
 import AbstractScriptComponent as AbstractScriptComponent
 import NVE_Equilibration, NPT_Equilibration, NVT_Equilibration
 
@@ -7,10 +8,30 @@ class EquilibrationComponent(AbstractScriptComponent):
     # which inhert EquilibrationComponent will implement this method and can use
     # the methods implemented in this class.
     
-    def __init__(self):
+    def __init__(self, properties : list[list]):
+        # property: list of list of properties sampled over time 
         pass
 
-    def is_equilibrated(self, property : list):
+
+    def is_equilibrated(self, property_idx: int, target: float, tol : float):
+        """
+        Args:
+            tol: tolerance for equilibration
+        """
+        property = self.properties[property_idx]
+        samples = len(property)
+        prop_cum = np.abs(np.cumsum(property) / (np.arange(samples) + 1) - target)
+        return np.all(prop_cum[int(0.9*samples):] < tol) # at least last 10% of the time series are near target value within tolerance
+
+
+
+        
+
+
+        
+        
+
+    def get_equilibration_property(self):
         pass
 
 
