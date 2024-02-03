@@ -16,6 +16,9 @@ class Pilot:
         for var in var_list:
             self.variables[f"{obj.__class__.__name__}_{var}"] = eval(f"obj.{var}")
 
+    def set_timestep(self, dt):
+        self.variables["timestep"] = dt
+
 
     script_ordering = {"Geometry" : 0, "Potential" : 1, "EquilibrationScript" : 2, "Simulation" : 3}
     def sort_script_components(self):
@@ -40,5 +43,4 @@ class Pilot:
             script += script_component.generate_script_text()
             script += "\n==========================================\n"
 
-
-        #& still need a way to define things like mass, timestep and other higher level sim params
+        #&where to set atom masses if not read in by geometry file?
