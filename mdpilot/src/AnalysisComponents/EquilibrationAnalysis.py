@@ -9,8 +9,7 @@ class EquilibrationAnalysis(AnalysisComponent):
     
     def __init__(self, eq_script_comp : EquilibrationScript):
        self.eq_script_comp = eq_script_comp
-
-       self.property_names = eq_script_comp.split()
+       self.property_names = eq_script_comp.log_header.split()
 
     def get_equilibration_properties(self):
         return FixPrintParser(self.eq_script_comp.log_file_name).parse()
@@ -22,7 +21,7 @@ class EquilibrationAnalysis(AnalysisComponent):
             tol: tolerance for equilibration
         """
 
-        properties = self.eq_script_comp.get_properties()
+        properties = self.eq_script_comp.get_equilibration_properties()
 
         is_equilibrated = {prop_name : 0 for prop_name in self.property_names}
 
