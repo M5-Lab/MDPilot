@@ -1,5 +1,5 @@
-from .AnalysisComponents import EquilibrationAnalysis
+from .AnalysisComponents import *
 
-from .ScriptComponents import EquilibrationScript
+from .ScriptComponents import *
 
 from .Pilot import Pilot
