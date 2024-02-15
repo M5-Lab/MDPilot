@@ -5,7 +5,7 @@ class NPT_Equilibration(EquilibrationScript):
     log_file_name = "npt_log.txt"
     log_header = '"Temp Press"'
 
-    def NPT_Equilibration(self, pilot : "Pilot", T_damp : float, P_damp : float,
+    def __init__(self, pilot : "Pilot", T_damp : float, P_damp : float,
                           T_start : float, P_start : float, n_steps : int,
                           log_interval = 10000, T_end = None, P_end = None, P_type : str = "iso"):
 

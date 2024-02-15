@@ -4,8 +4,8 @@ sys.path.append(os.path.expanduser(r"C:\Users\ejmei\repos\MDPilot"))
 from src import Geometry, LJ, NVT_Equilibration, Pilot
 
 
-structure_path = "./LJ_4UC.data"
-outpath = "."
+structure_path = "C:/Users/ejmei/repos/MDPilot/examples/script_gen_test/initial_structure_LJ.data"
+outpath = "C:/Users/ejmei/repos/MDPilot/examples/script_gen_test/mytest.txt"
 dt = 2.0 #fs
 T_damp = 100.0*dt
 T = 300

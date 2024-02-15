@@ -6,7 +6,7 @@ class NVE_Equilibration(EquilibrationScript):
     log_file_name = "nve_log.txt"
     log_header = '"PotEng"'
 
-    def NVE_Equilibration(self, pilot : "Pilot", n_steps : int, log_interval = 10000):
+    def __init__(self, pilot : "Pilot", n_steps : int, log_interval = 10000):
 
 
         self.n_steps = n_steps

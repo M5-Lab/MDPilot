@@ -1,4 +1,5 @@
 from .AbstractScriptComponent import AbstractScriptComponent
+import os
 
 class Geometry(AbstractScriptComponent):
 
@@ -7,4 +8,7 @@ class Geometry(AbstractScriptComponent):
 
 
     def generate_script_text(self):
-        read_data = f"read_data {self.geom_file_path}\n"
+        if os.path.exists(self.geom_file_path):
+            return f"read_data {self.geom_file_path}\n"
+        else:
+            raise FileNotFoundError(f"Geometry file not found: {self.geom_file_path}")

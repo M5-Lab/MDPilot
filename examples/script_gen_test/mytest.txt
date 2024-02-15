@@ -1,0 +1,21 @@
+# Variable Definitions:
+variable NVT_Equilibration_T_damp equal 200.0
+variable NVT_Equilibration_T_start equal 300
+variable NVT_Equilibration_T_end equal 300
+variable NVT_Equilibration_n_steps equal 1000000
+
+==========================================
+read_data C:/Users/ejmei/repos/MDPilot/examples/script_gen_test/initial_structure_LJ.data
+
+==========================================
+pair_style lj/cut 8.5
+pair_coeff 1 1 0.24037 3.4
+pair_modify shift yes 
+
+==========================================
+fix nvt_equil_fix all nvt temp 300 300 200.0
+run 1000000
+fix nvt_log all print 10000 "${thermo_temp}" screen no file nvt_log.txt title "Temp"
+unfix nvt_equil_fix
+
+==========================================

@@ -6,7 +6,7 @@ class NVT_Equilibration(EquilibrationScript):
     log_file_name = "nvt_log.txt"
     log_header = '"Temp"'
 
-    def NVT_Equilibration(self, pilot : "Pilot", T_damp : float, T_start : float, n_steps : int, log_interval = 10000, T_end = None):
+    def __init__(self, pilot : "Pilot", T_damp : float, T_start : float, n_steps : int, log_interval = 10000, T_end = None):
 
         self.T_damp = T_damp
         self.T_start = T_start
@@ -29,7 +29,7 @@ class NVT_Equilibration(EquilibrationScript):
 
         log = ""
         if self.log_interval is not None:
-            if self.log_interval > self.n_steps:
+            if self.log_interval < self.n_steps:
                 vars = "${thermo_temp}"
                 log = f"fix nvt_log all print {self.log_interval} \"{vars}\" screen no file {self.log_file_name} title {self.log_header}\n"
             else:
