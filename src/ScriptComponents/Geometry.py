@@ -1,5 +1,4 @@
-import AbstractScriptComponent
-
+from .AbstractScriptComponent import AbstractScriptComponent
 
 class Geometry(AbstractScriptComponent):
 

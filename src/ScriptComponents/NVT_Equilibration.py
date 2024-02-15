@@ -1,4 +1,4 @@
-import EquilibrationScript
+from .EquilibrationScript import EquilibrationScript
 
 
 class NVT_Equilibration(EquilibrationScript):
@@ -17,7 +17,6 @@ class NVT_Equilibration(EquilibrationScript):
             self.T_end = T_start
 
         pilot.add_variables(self, ["T_damp", "T_start", "T_end", "n_steps"])
-
 
 
         #* would be nice to check that T_damp ~ 100*dt

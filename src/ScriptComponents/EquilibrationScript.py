@@ -1,6 +1,6 @@
-import AbstractScriptComponent
+from .AbstractScriptComponent import AbstractScriptComponent
 
-class EquilbrationScript(AbstractScriptComponent):
+class EquilibrationScript(AbstractScriptComponent):
    
     log_file_name = None
     log_header = None

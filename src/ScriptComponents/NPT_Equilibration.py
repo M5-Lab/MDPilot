@@ -1,4 +1,4 @@
-import EquilibrationScript
+from .EquilibrationScript import EquilibrationScript
 
 class NPT_Equilibration(EquilibrationScript):
 

@@ -1,4 +1,4 @@
-import AbstractScriptComponent
+from .AbstractScriptComponent import AbstractScriptComponent
 
 
 class Potential(AbstractScriptComponent):
@@ -8,5 +8,6 @@ class Potential(AbstractScriptComponent):
 
 
     def generate_script_text(self):
+        pass
         #& @NICK idk how you load a potential from a file but do that here
 
