@@ -1,4 +1,4 @@
-import Potential
+from .Potential import Potential
 
 class LJ(Potential):
 

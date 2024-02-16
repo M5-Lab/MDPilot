@@ -21,6 +21,9 @@ class Pilot:
     def add_script(self, script_component : "AbstractScriptComponent"):
         self.script_components.append(script_component)
 
+    def add_scripts(self, *script_components : "AbstractScriptComponent"):
+        for sc in script_components:
+            self.add_script(sc)
 
     script_ordering = {"Geometry" : 0, "Potential" : 1, "EquilibrationScript" : 2, "Simulation" : 3}
     def sort_script_components(self):

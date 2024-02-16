@@ -1,23 +1,18 @@
-import EquilibrationScript
+from .EquilibrationScript import EquilibrationScript
 
 
-class NVT_Equilibration(EquilibrationScript):
+class NVE_Equilibration(EquilibrationScript):
 
-    log_file_name = "nvt_log.txt"
-    log_header = '"Temp"'
+    log_file_name = "nve_log.txt"
+    log_header = '"PotEng"'
 
-    def NVT_Equilibration(self, pilot : "Pilot", T_damp : float, T_start : float, n_steps : int, log_interval = 10000, T_end = None):
+    def __init__(self, pilot : "Pilot", n_steps : int, log_interval = 10000):
 
-        self.T_damp = T_damp
-        self.T_start = T_start
+
         self.n_steps = n_steps
         self.log_interval = log_interval
 
-        if T_end is None:
-            self.T_end = T_start
-
-        pilot.add_variables(self, ["T_damp", "T_start", "T_end", "n_steps"])
-
+        pilot.add_variables(self, ["n_steps"])
 
 
         #* would be nice to check that T_damp ~ 100*dt
