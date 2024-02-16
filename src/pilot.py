@@ -9,6 +9,7 @@ class Pilot:
     def __init__(self):
         self.script_components = []
         self.variables = {}
+        self.units_set = False
 
         self.script = ""
     
@@ -17,11 +18,13 @@ class Pilot:
             self.variables[f"{obj.__class__.__name__}_{var}"] = eval(f"obj.{var}")
 
     def set_timestep(self, dt : float):
-        self.script += f"timestep {dt}\n"
+        if self.units_set:
+            self.script += f"timestep {dt}\n"
 
     def set_units(self, units : str):
         if units not in ["real", "lj", "metal", "si", "cgs", "electron", "micro", "nano"]:
             raise ValueError(f"Unknonw unit type for LAMMPS: {units}.")
+        self.units_set = True
         self.script += f"units {units}\n"
 
     def add_script(self, script_component : "AbstractScriptComponent"):
@@ -50,14 +53,14 @@ class Pilot:
         for var_name in self.variables.keys():
             self.script += f"variable {var_name} equal {self.variables[var_name]}\n"
 
-        self.script += "\n==========================================\n\n"
+        self.script += "\n#==========================================#\n\n"
 
 
         self.sort_script_components()
 
         for script_component in self.script_components:
             self.script += script_component.generate_script_text()
-            self.script += "\n==========================================\n\n"
+            self.script += "\n#==========================================#\n\n"
 
         with open(out_path, "w") as f:
             f.write(self.script)

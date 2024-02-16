@@ -4,16 +4,16 @@ sys.path.append(os.path.expanduser(r"C:\Users\ejmei\repos\MDPilot"))
 from src import Geometry, LJ, NVT_Equilibration, Pilot, Velocities
 
 
-structure_path = "C:/Users/ejmei/repos/MDPilot/examples/script_gen_test/initial_structure_LJ.data"
-outpath = "C:/Users/ejmei/repos/MDPilot/examples/script_gen_test/mytest.txt"
+structure_path = "mnt/c/Users/ejmei/repos/MDPilot/examples/script_gen_test/initial_structure_LJ.data"
+outpath = "/mnt/c/Users/ejmei/repos/MDPilot/examples/script_gen_test/mytest.txt"
 dt = 2.0 #fs
 T_damp = 100.0*dt
 T = 300
 n_steps = 1000000
 
 p = Pilot()
-p.set_timestep(dt)
 p.set_units("real")
+p.set_timestep(dt)
 
 
 g = Geometry(structure_path)
