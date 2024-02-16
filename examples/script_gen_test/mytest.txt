@@ -19,6 +19,9 @@ pair_modify shift yes
 
 ==========================================
 
+velocity all create ${NVT_Equilibration_T_start} 750140 dist gaussian mom yes
+==========================================
+
 fix nvt_equil_fix all nvt temp ${NVT_Equilibration_T_start} ${NVT_Equilibration_T_end} ${NVT_Equilibration_T_damp}
 	run ${NVT_Equilibration_n_steps}
 	fix nvt_log all print 10000 "${thermo_ke} ${thermo_pe} ${thermo_temp}" screen no file nvt_log.txt title "KE PE Temp"

@@ -2,6 +2,7 @@ from .AbstractScriptComponent import AbstractScriptComponent
 from .Potential import Potential
 from .LJ import LJ
 from .Geometry import Geometry
+from .Velocities import Velocities
 # from .GreenKubo import GreenKubo
 
 from .EquilibrationScript import EquilibrationScript
