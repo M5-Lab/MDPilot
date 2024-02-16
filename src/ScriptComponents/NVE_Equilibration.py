@@ -4,7 +4,7 @@ from .EquilibrationScript import EquilibrationScript
 class NVE_Equilibration(EquilibrationScript):
 
     log_file_name = "nve_log.txt"
-    log_header = '"PotEng"'
+    log_header = '"KE PE Temp"'
 
     def __init__(self, pilot : "Pilot", n_steps : int, log_interval = 10000):
 
@@ -19,16 +19,19 @@ class NVE_Equilibration(EquilibrationScript):
 
 
     def generate_script_text(self):
-        cmd = f"fix nvt_equil_fix all nvt temp {self.T_start} {self.T_end} {self.T_damp}\n"
-        run = f"run {self.n_steps}\n"
-        unfix = f"unfix nvt_equil_fix\n"
+        cmd = f"fix nve_equil_fix all nve\n"
+        run = "\trun ${NVE_Equilibration_n_steps}\n"
+        unfix = "unfix nvt_equil_fix\n"
 
         log = ""
         if self.log_interval is not None:
-            if self.log_interval > self.n_steps:
-                vars = "${thermo_temp}"
-                log = f"fix nvt_log all print {self.log_interval} \"{vars}\" screen no file {self.log_file_name} title {self.log_header}\n"
+            if self.log_interval < self.n_steps:
+                vars = "${thermo_ke} ${thermo_pe} ${thermo_temp}"
+                log = f"\tfix nve_log all print {self.log_interval} \"{vars}\" screen no file {self.log_file_name} title {self.log_header}\n"
+                unfix += f"unfix nve_log\n"
             else:
-                raise Warning("Logging rate is greater than equilibration duration in NVT equilibration. Will not generate logs.")
+                raise Warning("Logging rate is greater than equilibration duration in NVE equilibration. Will not generate logs.")
 
-        return cmd + run + log + unfix
+        reset_timestep = "reset_timestep 0\n"
+
+        return cmd + run + log + unfix + reset_timestep

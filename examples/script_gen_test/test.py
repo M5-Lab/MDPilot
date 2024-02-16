@@ -12,6 +12,8 @@ T = 300
 n_steps = 1000000
 
 p = Pilot()
+p.set_timestep(dt)
+p.set_units("real")
 
 g = Geometry(structure_path)
 pot = LJ(0.24037, 3.4, 8.5)
