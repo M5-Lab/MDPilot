@@ -79,3 +79,59 @@ def block_ave(array,threshold=0.025, time_step=1, visualize=False):
 
 
     return best_transform, t_decorrelation, estimate_var
+
+
+def autocorrelation(array, maxLag=None):
+    '''
+    args: 
+    1. array: numpy array or array like object of equally spaced time series points
+    2. maxLag: float or float like object, max time delta to measure from data, if None then goes up to max possible step 
+    '''
+
+    '''
+    To do:
+    This will work for data t = 0, delt, 2*delt, 3*delt ....
+    Or 
+    t = 0, 5*delt, 10*delt ....
+
+    But I want to be able to add a step parameter,
+    I.e. given the first array, maybe I only want 1/2x resolution
+    So collect points at 0 * 2delt, 2delt * 4delt ... and so on 
+    '''
+    if not maxLag:
+        maxLag=len(array)-1
+    correlations = np.zeros(shape=(maxLag))
+    correlations[0] = np.ave(array@array)
+    for step in range(1, maxLag):
+        correlations[step] = np.ave(array[:-step]@array[step:])
+    return correlations 
+
+def GK(autocorrelation, spacings, coef):
+    '''
+    args:
+    1. autocorrelation: numpy array or array like object for estimated autocorrelation function for related property of interest
+    2. coef: 'diff' or 'visc' or 'thermal' or 'electric', with this decides what scaling it needs on integral 
+    '''
+
+    integral = np.trapz(autocorrelation, spacings)
+
+    if coef == 'diff':
+        pass
+    elif coef == 'visc':
+        pass
+    elif coef == 'thermal':
+        pass
+    elif coef == 'electric':
+        pass
+    else:
+        return ValueError("coef must be one of these: 'diff' or 'visc' or 'thermal' or 'electric'")
+
+    
+
+
+
+    
+
+
+ 
+    
