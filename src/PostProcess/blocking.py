@@ -21,19 +21,22 @@ def blocking(samples):
     errors (numpy array): error in the estimate of the true standard deviation
     '''
 
-    n_samples = len(samples)
+    tot_samples = len(samples)
 
-    assert n_samples > 0, "No samples provided"
+    assert tot_samples > 0, "No samples provided"
 
-    pow = int(np.log2(n_samples))
-    blocks = samples.copy()
-
+    pow = int(np.log2(tot_samples))
+    
+    n_samples = 2**pow
+    
+    blocks = samples[:n_samples]
     powers = np.arange(pow)
     estimates = np.zeros((pow))
     errors = np.zeros((pow))
 
     block_size = 1
     num_blocks = n_samples
+    
     estimates[0] = np.std(blocks)/np.sqrt(num_blocks-1)
     errors[0] = estimates[0]/np.sqrt(2*(num_blocks-1))
 
@@ -43,8 +46,14 @@ def blocking(samples):
         blocks = (blocks[::2] + blocks[1::2])/2 # (blocks[0] + blocks[1], blocks[2] + blocks[3], ...)/2
         estimates[p] = np.std(blocks)/np.sqrt(num_blocks-1)
         errors[p] = estimates[p]/np.sqrt(2*(num_blocks-1))
-
-    return powers, estimates, errors 
-
-
     
+    # Now determine the optimal block size
+    blocksize_opt = None 
+    for i in range(1, pow):
+        if np.abs(estimates[i] - estimates[i-1]) < errors[i-1]:
+            blocksize_opt = 2**(i-1)
+            break
+
+    return powers, estimates, errors, blocksize_opt 
+
+
